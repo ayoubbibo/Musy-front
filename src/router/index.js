@@ -71,16 +71,11 @@ const routes = [
   }
 ];
 
-
-
-
 const router = createRouter({
   history: createWebHistory(),
   routes,
 });
 
-
-/*
 router.beforeEach((to, from, next) => {
   const publicPages = ['/login', '/home'];
   const authRequired = !publicPages.includes(to.path);
@@ -93,5 +88,4 @@ router.beforeEach((to, from, next) => {
   next();
   }
  });
-*/
 export default router;
