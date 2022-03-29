@@ -3,7 +3,7 @@ import authHeader from './auth-header';
 
 // (Data service)
 
-const API_URL = 'http://localhost:3000/api/test/';
+const API_URL = 'https://musyplay.herokuapp.com/api/test/';
 
 class UserService {
   getPublicContent() {
