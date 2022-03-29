@@ -3,7 +3,7 @@ import authHeader from './auth-header';
 
 // (Data service)
 
-const API_URL = 'https://musy.netlify.app/api/test/';
+const API_URL = 'https://musyplay.herokuapp.com/api/test/';
 
 class UserService {
   getPublicContent() {
