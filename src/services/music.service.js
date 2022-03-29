@@ -2,7 +2,7 @@ import axios from 'axios';
 import authHeader from './auth-header';
 // (music service)
 
-const API_URL = 'https://musyplay.herokuapp.com/api/music/';
+const API_URL = 'https://musy.netlify.app/api/music/';
 
 class MusicService {
   createMusicDynamic(music) {

@@ -1,7 +1,7 @@
 import axios from 'axios';
 // (Authentication service)
 
-const API_URL = 'https://musyplay.herokuapp.com/api/auth/';
+const API_URL = 'https://musy.netlify.app/api/auth/';
 
 class AuthService {
   login(user) {
