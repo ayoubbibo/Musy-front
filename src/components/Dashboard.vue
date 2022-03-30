@@ -89,7 +89,6 @@ export default {
     align-items: center;
     justify-content: center;
     margin: 0px 0px 15px 0px;
-    background-image: url("https://f.hellowork.com/blogdumoderateur/2011/07/faceyourmanga-100x100.jpg");
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     -moz-backdrop-filter: blur(10px);
