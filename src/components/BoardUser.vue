@@ -1,19 +1,17 @@
 <template>
   <div class="container">
-    <header class="jumbotron">
-      <h3>{{ content }}</h3>
-      
+    <header class="jumbotron">      
       <div class="searchOptions">
         <div class="search">
           <div class="icon" @click="search"></div>
 
           <div class="inputSearch">
-            <input type="text" :placeholder="`Search On ${mine}`" id="mysearch" v-model="toSearch" @change="findOne">
+            <input type="text" :placeholder="`Search On ${mine}`" id="mysearch" v-model="toSearch" @keyup.prevent="findOne">
           </div>
 
           <span class="clear" @click="clear"><font-awesome-icon icon="trash"/></span>
         </div>
-        <button class="search-mine-btn" @click="searchMineBtn"><font-awesome-icon icon="search"/> Only My Songs</button>
+        <button class="search-mine-btn" v-if="showArtistBoard" @click="searchMineBtn"><font-awesome-icon icon="search"/> Only My Songs</button>
       </div>
     <h5> {{ message }} </h5>
     </header>
@@ -46,7 +44,7 @@
           <div class="play-btn" @click="remove(track)" v-show="this.$store.state.auth.user.id === track.userId"><font-awesome-icon icon="trash"/> Delete</div>
           
           <router-link :to="{ 
-            path: '/dashboard/admin', 
+            path: '/dashboard/artist', 
             query: { toUpdate: track._id }}" 
             active-class="active" tag="button" exact>  
             <div class="play-btn"  v-show="this.$store.state.auth.user.id === track.userId"><font-awesome-icon icon="bars-staggered"/> Update</div>
@@ -304,10 +302,25 @@ export default {
           error.toString();
     });
   }, 
+  computed: {
+    currentUser() {
+      return this.$store.state.auth.user;
+    },
+    showArtistBoard() {
+      if (this.currentUser && this.currentUser['roles']) {
+        return this.currentUser['roles'].includes('ROLE_ADMIN');
+      }
+      return false;
+    }
+  }
 };
 </script>
 
 <style scoped>
+.container {
+  width: 100%;
+
+}
 .jumbotron
 {
   margin : 15px 15px 15px 15px;
@@ -359,7 +372,7 @@ export default {
     position: relative;
     bottom: auto;
     right: auto;
-    margin-top: 20px;
+
   }
   .search-mine-btn:active {
     transform: scale(1.1);
@@ -478,6 +491,7 @@ export default {
   flex-direction: column;
   flex-wrap: wrap;
   background-size: cover;
+
 }
 
 *{
@@ -521,8 +535,11 @@ export default {
 @media screen and (max-width: 576px), (max-height: 500px) {
   .music-li {
     padding: 20px;
-    width: 250px;
-    margin-top: 75px;
+    margin-top: 75px; 
+    margin-bottom:15px;
+    margin-left:0;
+    margin-right:0;
+
     min-height: initial;
     padding-bottom: 30px;
   }
@@ -544,8 +561,8 @@ export default {
   .music-cover {
     margin-top: -70px;
     margin-bottom: 25px;
-    width: 200px;
-    height: 200px;
+    width: 150px;
+    height: 150px;
     margin-left: auto;
     margin-right: auto;
   }
@@ -615,6 +632,7 @@ export default {
   letter-spacing: 1px;
   font-size: 16px;
   transition: all 0.3s ease-in-out;
+  cursor: pointer;
 }
 @media screen and (min-width: 500px) {
   .play-btn:hover {

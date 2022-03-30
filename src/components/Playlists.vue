@@ -552,7 +552,7 @@ body {
 
 .progress {
   width: 100%;
-  height: 100%;
+  height: 120px;
   user-select: none;
   display:flex;
   flex-direction: column;
@@ -570,6 +570,8 @@ body {
   margin-bottom: 10px;
 }
 .progress__time {
+  position:absolute;
+  margin-top: 70px;
   color: #71829e;
   font-weight: 700;
   font-size: 16px;

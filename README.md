@@ -1,4 +1,4 @@
-# front
+# Musy frontend
 
 ## Project setup
 ```

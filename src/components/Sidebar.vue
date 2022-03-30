@@ -1,21 +1,15 @@
 <template>
     <div class="Sidebar">
-        <div class="title">
-            <img class="logo" src="../assets/Musy_1.gif" alt="Logo">
-        </div>
-
         <div class="menu-items">
-            <router-link v-if="showAdminBoard" to="/dashboard/admin" active-class="active" tag="button" exact class="side-btn">
+            <div class="title">
+                <img class="logo" src="../assets/Musy_1.gif" alt="Logo">
+            </div>
+            <router-link v-if="showArtistBoard" to="/dashboard/artist" active-class="active" tag="button" exact class="side-btn">
                 <div class="link-container">
-                    <font-awesome-icon icon="user-plus"/> Admin Board
+                    <font-awesome-icon icon="user-plus"/> Artist Board
                 </div>
             </router-link>
 
-            <router-link  v-if="showModeratorBoard" to="/dashboard/mod" active-class="active" tag="button" exact class="side-btn">
-                <div class="link-container">    
-                    Moderator Board
-                </div>            
-            </router-link>
             
             <router-link v-if="currentUser" to="/dashboard/user" active-class="active" tag="button" exact class="side-btn">
                 <div class="link-container">
@@ -24,7 +18,7 @@
             </router-link>
             <router-link to="/dashboard/playlists" active-class="active" tag="button" exact class="side-btn">
                 <div class="link-container">
-                    <font-awesome-icon  icon="reorder"/> Playlists
+                    <font-awesome-icon icon="play"/> Player
                 </div>
             </router-link>
             <router-link to="/dashboard/about" active-class="active" tag="button" exact class="side-btn">
@@ -43,15 +37,9 @@ export default {
     currentUser() {
       return this.$store.state.auth.user;
     },
-    showAdminBoard() {
+    showArtistBoard() {
       if (this.currentUser && this.currentUser['roles']) {
         return this.currentUser['roles'].includes('ROLE_ADMIN');
-      }
-      return false;
-    },
-    showModeratorBoard() {
-      if (this.currentUser && this.currentUser['roles']) {
-        return this.currentUser['roles'].includes('ROLE_MODERATOR');
       }
       return false;
     }
@@ -64,6 +52,8 @@ export default {
 
 
 <style scoped>
+
+
 
 .logo
 {
@@ -79,7 +69,8 @@ export default {
     flex-direction: column;
     margin-top: 40px;
     margin-left: 6px;
-
+    position:sticky;
+    top: 0;
 }
 
 .menu-items > * {

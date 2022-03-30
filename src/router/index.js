@@ -1,19 +1,23 @@
 import { createWebHistory, createRouter } from "vue-router";
 import Home from "../components/Home.vue";
+import About from "../components/About.vue";
 import Login from "../components/Login.vue";
 import dashboard from '../components/Dashboard'
 //import Register from "../components/Register.vue";
 // lazy-loaded
 const Profile = () => import("../components/Profile.vue")
-const BoardAdmin = () => import("../components/BoardAdmin.vue")
-const BoardModerator = () => import("../components/BoardModerator.vue")
+const BoardArtist = () => import("../components/BoardArtist.vue")
 const BoardUser = () => import("../components/BoardUser.vue")
 
 const routes = [
   {
     path: "/",
-    name: "login",
-    component: Login,
+    name: "home",
+    component: Home,
+  },
+  {
+    path: "/home",
+    component: Home,
   },
   {
     path: "/login",
@@ -42,7 +46,8 @@ const routes = [
       },
       {
         path: 'about',
-        component: Home
+        name:"about",
+        component: About
       },
       {
         path: "profile",
@@ -51,22 +56,14 @@ const routes = [
         component: Profile,
       },
       {
-        path: "admin",
-        name: "admin",
+        path: "artist",
+        name: "artist",
         // lazy-loaded
-        component: BoardAdmin,
+        component: BoardArtist,
         props(route) {
           return {  toUpdate: route.query.toUpdate }
         }
       },
-      {
-        path: "mod",
-        name: "moderator",
-        // lazy-loaded
-        component: BoardModerator,
-      },
-      
-      
     ]
   }
 ];
@@ -83,7 +80,7 @@ router.beforeEach((to, from, next) => {
   // trying to access a restricted page + not logged in
   // redirect to login page
   if (authRequired && !loggedIn) {
-    next('/login');
+    next('/home');
   } else {
   next();
   }

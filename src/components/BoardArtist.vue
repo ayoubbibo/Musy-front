@@ -56,7 +56,15 @@
                   </div>
                 </div>
                 <h5> {{ message }} </h5>
-              <button>Submit</button>
+              <div class="form-group" >            
+                <button class="btn btn-primary btn-block" >
+                <span
+                  v-show="loading"
+                  class="spinner-border spinner-border-sm"
+                ></span>
+                  Publish
+              </button>
+            </div>
           </form>
         {{ content }}
         </div>
@@ -72,6 +80,7 @@ export default {
   data() {
     return {
       content: "",
+      loading: false,
       name: '',
       description: '',
       userId: [],
@@ -161,6 +170,7 @@ export default {
     },
     async onSubmit()
     {
+      this.loading= true;
       if(this.selected === true && this.update === undefined)
       {
         console.log("The Front is using Create Music Dynamic")
@@ -323,6 +333,7 @@ export default {
 </script>
 
 <style scoped>
+
 .jumbotron
 {
   margin : 15px 15px 15px 15px;
@@ -348,15 +359,11 @@ input[type="file"]
   background-image: linear-gradient(to left, #cc208e 0%, #6713d2 100%);                
   border-radius : 50px;
   box-shadow : 0px 0px 10px  #cc208e;
-  width : 350px;
+  width : 75%;
   outline: none; 
   color:white;
   cursor: pointer;
-
-
 }
-
-
 
 </style>
 

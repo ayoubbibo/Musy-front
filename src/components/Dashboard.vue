@@ -1,24 +1,23 @@
 <template>
     <div class="Dashboard">
         <Sidebar/>
+        <div class="nav">
+            <div v-if="currentUser" class="profile">
+                <router-link to="/dashboard/profile" class="user" >
+                    <font-awesome-icon icon="user"/>
+                    {{ currentUser.username }}
+                </router-link>
+            </div>
+
+            <div @click.prevent="logOut" class="logout">
+                <a>
+                    <font-awesome-icon icon="sign-out-alt" /> 
+                </a>
+                <p> LogOut </p>
+            </div>
+        </div>
         <div class="content">
-        <router-view/>
-            <div class="nav">
-
-                <div v-if="currentUser" class="profile">
-                    <router-link to="/dashboard/profile" class="user" >
-                        <font-awesome-icon icon="user"/>
-                        {{ currentUser.username }}
-                    </router-link>
-                </div>
-
-                <div @click.prevent="logOut" class="logout">
-                    <a>
-                        <font-awesome-icon icon="sign-out-alt" /> 
-                    </a>
-                    <p> LogOut </p>
-                </div>
-            </div>    
+            <router-view/>      
         </div>
     </div>
 </template>
@@ -47,19 +46,19 @@ export default {
 
 .Dashboard {
     
-    display: grid;
-    grid-template-columns: 1fr 5fr;
+    display:flex;
+    flex-direction:row;
+    flex-wrap:column;
     background-color: #202020;
-    min-height: 100vh;
-    /*
-    width: 100vw;
-    */
+    min-height: 150vh;
 }
 
 .content {
     border-radius: 10px;
     margin: 10px 15px 15px 0px;
-    background-image: linear-gradient(to left, #cc208e 0%, #6713d2 100%);                
+    background-image: linear-gradient(to left, #cc208e 0%, #6713d2 100%);    
+    display: flex;
+    width:100vw;           
 }
 
 .nav{
@@ -67,6 +66,7 @@ export default {
     position: absolute;
     top: 0;
     right: 0;
+    z-index:1;
     margin: 30px 30px 30px 30px;  
     display: flex;
     justify-content: center;
@@ -133,5 +133,7 @@ export default {
     color: red;
     
 }
+
+
 
 </style>
